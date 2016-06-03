@@ -11,4 +11,16 @@
 
 #include <stdio.h>
 
+typedef unsigned bit16;
+
+bit16 construct(unsigned sign, unsigned expon, unsigned signif);
+unsigned extractSign(bit16 encoding);
+unsigned extractExponent(bit16 encoding);
+unsigned extractSignificand(bit16 encoding);
+bit16 fp_add(bit16 x, bit16 y);
+void print16(bit16 encoding);
+void printSignificand (unsigned significand);
+
+
+
 #endif /* floatlib_h */
