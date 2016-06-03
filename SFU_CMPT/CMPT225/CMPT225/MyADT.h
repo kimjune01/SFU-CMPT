@@ -28,23 +28,12 @@ using namespace std;
 class MyADT {
     
 private:
-    static const int NUMBER_OF_CHARACTERS = 26;     //initial size of array
-    
-    Profile *multiMembers[NUMBER_OF_CHARACTERS];    //2d array of members
-    int multiElementCount[NUMBER_OF_CHARACTERS];
-    int multiCurrentCapacity[NUMBER_OF_CHARACTERS];
-    ////////
-    
-    //    Profile *members;                       //array of profiles as members
-    static const int INITIAL_SIZE = 2;     //initial size of array
-//    int currentCapacity = INITIAL_SIZE;     //current capacity of array
-//    int elementCount = 0;                   //current number of profiles in MyADT
-    //indices for the letters of the alphabet in the array
-    //a is 0, b is 1, .. z is 25
-    //int sectionIndices[NUMBER_OF_CHARACTERS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    static const int NUMBER_OF_CHARACTERS = 26;     //Number of characters in the alphabet
+    Profile *multiMembers[NUMBER_OF_CHARACTERS];    //A list of list of members
+    int multiElementCount[NUMBER_OF_CHARACTERS];    //A list of number of members
+    int multiCurrentCapacity[NUMBER_OF_CHARACTERS]; //A list of the curent capacity of lists
+    static const int INITIAL_SIZE = 32;             //initial size of array
 public:
-    
-
     
     // Description: Returns the total of elements currently stored in MyADT.
     int  getElementCount() const;
@@ -66,8 +55,6 @@ public:
     // Description: Prints all elements stored in MyADT.
     friend ostream & operator<<(ostream & os, const MyADT& rhs);
     
-    void printAll();
-    void printSection(Profile* section, int elementCount);
 };
 
 

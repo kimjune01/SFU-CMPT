@@ -155,7 +155,7 @@ int main() {
     
     
     cout << *members;
-    
+    cout << members->getElementCount() << endl;
     
     members->insert(*dibby);
     members->insert(*debby);
@@ -167,14 +167,11 @@ int main() {
     
     
     members->remove(*someProfile);
-    members->printAll();
     members->remove(*jane);
     members->remove(*bob);
     members->remove(*ernie);
-    members->printAll();
     members->remove(*fei);
     members->remove(*fei);
-    members->printAll();
     members->remove(*casey);
     members->remove(*bobby);
     members->remove(*debbie);
