@@ -74,30 +74,33 @@ bool MyADT::insert(const Profile& newElement){
     }
     
     //find the appropriate array given the character code
-    Profile* members = membersFor(newElement, multiMembers);
+    Profile** members = &(multiMembers[characterCodeFor(newElement.getName())]);
     int* elementCount = elementCountFor(newElement, multiElementCount);
     int* currentCapacity = currentCapacityFor(newElement, multiCurrentCapacity);
 
     //if the array is empty, then initiate the array
-    if (elementCount == 0) {
-        members = new Profile[INITIAL_SIZE];
+    if (*elementCount == 0) {
+        *members = (new Profile[INITIAL_SIZE]);
+        *currentCapacity = INITIAL_SIZE;
     }
 
     //if the array has reached capacity, increase its capacity
-    if (elementCount == currentCapacity) {
+    if (*elementCount == *currentCapacity) {
         int oldCapacity = *currentCapacity;
         *currentCapacity *= 2;
-        Profile *temporaryMembers = members;
-        members = new Profile[*currentCapacity];
+        Profile *temporaryMembers = *members;
+        *members = new Profile[*currentCapacity];
         for (int i = 0; i < oldCapacity; i++) {
-            members[i] = temporaryMembers[i];
+            (*members)[i] = temporaryMembers[i];
         }
         delete[] temporaryMembers;
     }
+    
     //append directly to the end of the members array
-    members[*elementCount++] = newElement;
-    
-    
+    //DOESNT WORK AS INTENDED
+    //multiMembers[characterCodeFor(newElement.getName())][(*elementCount)] = newElement;
+    (*members)[(*elementCount)] = newElement;
+    (*elementCount)++;
     //insertion success
     return true;
 }
@@ -165,6 +168,27 @@ void MyADT::removeAll(){
         }
         //indicate empty array
         *elementCount = 0;
+    }
+    
+}
+
+void MyADT::printAll() {
+    for (int i =0; i < NUMBER_OF_CHARACTERS; i++) {
+        Profile* members = multiMembers[i];
+        int elementCount = multiElementCount[i];
+        //for each element in the array
+        
+        for( int j=0; j<elementCount; j++ ) {
+            cout << members[j].getName() << endl;
+        }
+    }
+    cout << endl;
+}
+
+void MyADT::printSection(Profile* section, int elementCount) {
+    Profile* members = section;
+    for( int i=0; i<elementCount; i++ ) {
+        cout << members[i].getName() << endl;
     }
     
 }

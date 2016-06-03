@@ -36,7 +36,7 @@ private:
     ////////
     
     //    Profile *members;                       //array of profiles as members
-    static const int INITIAL_SIZE = 32;     //initial size of array
+    static const int INITIAL_SIZE = 2;     //initial size of array
 //    int currentCapacity = INITIAL_SIZE;     //current capacity of array
 //    int elementCount = 0;                   //current number of profiles in MyADT
     //indices for the letters of the alphabet in the array
@@ -63,10 +63,11 @@ public:
     
     // Description: Removes all elements.
     void removeAll();
-    
     // Description: Prints all elements stored in MyADT.
     friend ostream & operator<<(ostream & os, const MyADT& rhs);
     
+    void printAll();
+    void printSection(Profile* section, int elementCount);
 };
 
 

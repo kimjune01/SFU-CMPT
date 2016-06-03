@@ -130,9 +130,6 @@ int main() {
     Profile *someProfile = new Profile();
     someProfile->setName("Aoe");
     
-    members->insert(*someProfile);
-    
-    
     Profile *jane = new Profile("Jane");
     Profile *bob = new Profile("Bob");
     Profile *bobby = new Profile("Bobby");
@@ -147,7 +144,7 @@ int main() {
     Profile *dubby = new Profile("dubby");
     Profile *dobby = new Profile("dobby");
     
-    members->insert(*someProfile);
+    members->insert(*jane);
     members->insert(*jane);
     members->insert(*bob);
     members->insert(*ernie);
@@ -155,14 +152,29 @@ int main() {
     members->insert(*casey);
     members->insert(*bobby);
     members->insert(*debbie);
+    
+    
+    cout << *members;
+    
+    
+    members->insert(*dibby);
+    members->insert(*debby);
+    members->insert(*dabby);
+    members->insert(*dubby);
+    members->insert(*dobby);
+    
     cout << *members;
     
     
     members->remove(*someProfile);
+    members->printAll();
     members->remove(*jane);
     members->remove(*bob);
     members->remove(*ernie);
+    members->printAll();
     members->remove(*fei);
+    members->remove(*fei);
+    members->printAll();
     members->remove(*casey);
     members->remove(*bobby);
     members->remove(*debbie);
