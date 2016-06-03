@@ -78,6 +78,7 @@ bool MyADT::insert(const Profile& newElement){
     }
     
     //find the appropriate array and metadata, given the character code
+    //get the address of the appropriate array in this special case to allow assignment
     Profile** members = &(multiMembers[characterCodeFor(newElement.getName())]);
     int* elementCount = elementCountFor(newElement, multiElementCount);
     int* currentCapacity = currentCapacityFor(newElement, multiCurrentCapacity);
