@@ -129,6 +129,10 @@ int main() {
     
     Profile *someProfile = new Profile();
     someProfile->setName("Aoe");
+    
+    members->insert(*someProfile);
+    
+    
     Profile *jane = new Profile("Jane");
     Profile *bob = new Profile("Bob");
     Profile *bobby = new Profile("Bobby");

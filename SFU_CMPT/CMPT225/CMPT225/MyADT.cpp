@@ -27,8 +27,12 @@ using namespace std;
 
 // Description: returns the number of elements in MyADT
 int  MyADT::getElementCount() const{
+    int runningSum = 0;
+    for (int i; i < NUMBER_OF_CHARACTERS; i++) {
+        runningSum = multiElementCount[i];
+    }
     //using a single dimensional array with a counter
-    return elementCount;
+    return runningSum;
 }
 
 // Description: A helper function for getting the character code given a name
@@ -42,67 +46,57 @@ int characterCodeFor(string name) {
     return newNameFirstLetter - 'A';
 }
 
+Profile* membersFor(const Profile& newElement, Profile *multiMembers[]) {
+    int characterCode = characterCodeFor(newElement.getName());
+    
+    return multiMembers[characterCode];
+}
+
+int* elementCountFor(const Profile& newElement, int multiElementCount[]) {
+    int characterCode = characterCodeFor(newElement.getName());
+    return &multiElementCount[characterCode];
+}
+
+int* currentCapacityFor(const Profile& newElement, int multiCurrentCapacity[]) {
+    int characterCode = characterCodeFor(newElement.getName());
+    return  &multiCurrentCapacity[characterCode];
+}
+
 // Description: Inserts an element.
 // Precondition: newElement must not already be in data collection.
 // Postcondition: newElement inserted and the appropriate elementCount has been incremented.
 bool MyADT::insert(const Profile& newElement){
 
-    //if array is empty, then initiate the array.
-    if (elementCount == 0) {
-        members = new Profile[currentCapacity];
-    }
-    // if the array has reached capacity, increase its capacity
-    if (elementCount == currentCapacity) {
-        //store the old capacity for copying purposes later
-        int oldCapacity = currentCapacity;
-        //double the capacity
-        currentCapacity *= 2;
-        //hold the old members in a temporary array
-        Profile *temporaryMembers = members;
-        //replace the existing members with the bigger array
-        members = new Profile[currentCapacity];
-        //copy the contents of the temporary array into the new bigger array
-        for (int i=0; i < oldCapacity; i++) {
-            members[i] = temporaryMembers[i];
-        }
-        //release the memory space held by the old array
-        delete[] temporaryMembers;
-    }
-    
     //check if the new element is a unique entry
     if (search(newElement) != NULL){
         //if it is not unique, then do nothing.
         return false;
     }
     
-    //get the name of the new member
-    string newName = newElement.getName();
-    int characterCode = characterCodeFor(newName);
-    //fetching the section index for the given name
-    int sectionIndex = sectionIndices[characterCode];
-    //keep track of where to insert the new member
-    
+    //find the appropriate array given the character code
+    Profile* members = membersFor(newElement, multiMembers);
+    int* elementCount = elementCountFor(newElement, multiElementCount);
+    int* currentCapacity = currentCapacityFor(newElement, multiCurrentCapacity);
 
-    //increment the size indicator of the array, in preparation for insertion
-    elementCount++;
-    //insert at section index by iterating from the end of the array
-    //it's as if the last place in the array is empty to begin with
-    for (int i = getElementCount()-1; i >= sectionIndex; i--) {
-        //shift elements to the next place until the section index
-        if (i > sectionIndex) {
-            //the ith member takes on the value of its left neighbor as i decrements
-            members[i] = members[i-1];
-        } else if (i == sectionIndex) {
-            //reached the insertion index. Inside the for loop to account for sectionIndex==0.
-            //insert at the insertion index.
-            members[sectionIndex] = newElement;
+    //if the array is empty, then initiate the array
+    if (elementCount == 0) {
+        members = new Profile[INITIAL_SIZE];
+    }
+
+    //if the array has reached capacity, increase its capacity
+    if (elementCount == currentCapacity) {
+        int oldCapacity = *currentCapacity;
+        *currentCapacity *= 2;
+        Profile *temporaryMembers = members;
+        members = new Profile[*currentCapacity];
+        for (int i = 0; i < oldCapacity; i++) {
+            members[i] = temporaryMembers[i];
         }
+        delete[] temporaryMembers;
     }
+    //append directly to the end of the members array
+    members[*elementCount++] = newElement;
     
-    //update the section indices for all following characters' sections
-    for (int i = characterCode; i < NUMBER_OF_CHARACTERS; i++) {
-        sectionIndices[i+1]++;
-    }
     
     //insertion success
     return true;
@@ -118,31 +112,21 @@ bool MyADT::remove(const Profile& toBeRemoved){
         return false;
     }
     
-    //for updating the section indices later
-    string name = candidate->getName();
-    int characterCode = characterCodeFor(name);
-    //if the candidate is found, find where the candidate is
-    int removalIndex = 0;
-    for( int i=0; i<elementCount; i++ ) {
+    //fetch the appropriate array given the character code
+    Profile* members = membersFor(toBeRemoved, multiMembers);
+    int *elementCount = elementCountFor(toBeRemoved, multiElementCount);
+    
+    for( int i=0; i< *elementCount; i++ ) {
         if( &members[i] == candidate ){
-            //found the candidate. Take note of its place.
-            removalIndex = i;
+            //found the candidate. Move the last member in its place.
+            members[i] = members[*elementCount-1];
             break;
         }
     }
-    //shift elements to the left until the second-last place in the array
-    for (int i = removalIndex; i<elementCount-1; i++) {
-        //take the the right of each member and overwrite
-        members[i] = members[i+1];
-    }
-    //decrement the array's element count to indicate a smaller size
-    elementCount--;
-    //removal success. Ignore the extra element after the end
-
-    //decrement the section indices for all following sections
-    for (int i = characterCode; i < NUMBER_OF_CHARACTERS; i++) {
-        sectionIndices[i+1]--;
-    }
+    (*elementCount)--;
+    
+    
+    /////
     return true;
 }
 
@@ -151,12 +135,12 @@ Profile* MyADT::search(const Profile& target){
     //the search result points to nothing by default
     Profile *result = NULL;
     //find the section index by target's character
-    int characterCode = characterCodeFor(target.getName());
-    int sectionIndex = sectionIndices[characterCode];
-    //until the beginning of the next section or the end
-    int untilIndex = min(sectionIndices[characterCode+1], getElementCount());
+    
+    Profile* members = membersFor(target, multiMembers);
+    int elementCount = *elementCountFor(target, multiElementCount);
+    
     //for each member in the array in the range
-    for (int i = sectionIndex; i < untilIndex; i++) {
+    for (int i = 0; i < elementCount; i++) {
         //look for the place where the target points to the same profile as the array
         if (members[i] == target) {
             //found the target. Assign and exit loop
@@ -170,17 +154,19 @@ Profile* MyADT::search(const Profile& target){
 
 // Description: Removes all elements.
 void MyADT::removeAll(){
-    //for each element in the array
-    for( int i=0; i<elementCount; i++ ) {
-        //remove the members one at a time
-        remove(members[i]);
+    
+    for (int i =0; i < NUMBER_OF_CHARACTERS; i++) {
+        Profile* members = multiMembers[i];
+        int* elementCount = &multiElementCount[i];
+        //for each element in the array
+        for( int i=0; i<*elementCount; i++ ) {
+            //remove the members one at a time
+            remove(members[i]);
+        }
+        //indicate empty array
+        *elementCount = 0;
     }
-    //indicate empty array
-    elementCount = 0;
-    //purge all section indices
-    for (int i = 0; i < NUMBER_OF_CHARACTERS; i++) {
-        sectionIndices[i] = 0;
-    }
+    
 }
 
 // Description: Prints all elements stored in MyADT.
@@ -188,12 +174,19 @@ ostream & operator<<(ostream & os, const MyADT& rhs){
     //append the initial string to the output stream with two newlines
     os << "Here is the list of members:\n\n";
     //for each member in the array
-    for (int i = 0; i < rhs.getElementCount(); i++) {
-        //get a reference to each member
-        Profile p = rhs.members[i];
-        //and append its attributes to the output stream without the list of friends
-        os << p.getName() << ", " << p.getImage() << ", " << p.getStatus() << ", with " << p.getNumberOfFriends() << " friends" << endl;
+    
+    for (int i =0; i < MyADT::NUMBER_OF_CHARACTERS; i++) {
+        Profile* members = rhs.multiMembers[i];
+        int elementCount = rhs.multiElementCount[i];
+        //for each element in the array
+        for( int i=0; i<elementCount; i++ ) {
+            //remove the members one at a time
+            Profile p = members[i];
+            //and append its attributes to the output stream without the list of friends
+            os << p.getName() << ", " << p.getImage() << ", " << p.getStatus() << ", with " << p.getNumberOfFriends() << " friends" << endl;
+        }
     }
+    
     return os;
 }
 
