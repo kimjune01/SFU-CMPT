@@ -18,9 +18,7 @@ typedef unsigned bit16;
 //and, or, not, xor, shift-right, and shift-left
 // & | ! ^ >> <<
 //use “==” and “!=” but none of the other relational operators
-void printhex(bit16 x){
-    printf("%.4x  ", x);
-}
+
 
 bit16 construct(unsigned sign, unsigned expon, unsigned signif) {
     bit16 new16 = 0;
@@ -51,17 +49,20 @@ unsigned extractSignificand(bit16 encoding) {
 bit16 fp_add(bit16 x, bit16 y){ //non-negative x and y
     if (x == 0) return y;
     if (y == 0) return x;
-    unsigned xSign = extractSign(x);
-    unsigned ySign = extractSign(y);
     unsigned xExponent = extractExponent(x);
     unsigned yExponent = extractExponent(y);
     unsigned xSignificand = extractSignificand(x) + 0b10000000;
     unsigned ySignificand = extractSignificand(y) + 0b10000000;
     
-
     unsigned delta = 0;
-    
-    if (xExponent < yExponent) {
+                               
+    unsigned greaterThan =
+        xExponent != yExponent &&
+        ( yExponent == 0 ||
+            (xExponent / yExponent) ); //magic of the internet
+    //  above is equivalent to:
+    //  greaterThan = xExponent > yExponent
+    if (!greaterThan) {
         delta = yExponent - xExponent;
         xExponent += delta;
         xSignificand >>= delta;
@@ -70,6 +71,7 @@ bit16 fp_add(bit16 x, bit16 y){ //non-negative x and y
         yExponent += delta;
         ySignificand >>= delta;
     }
+    
     
     unsigned newSignificand = xSignificand + ySignificand;
 
@@ -97,7 +99,7 @@ bit16 fp_add(bit16 x, bit16 y){ //non-negative x and y
         secondSignificand >>= 7;
     }
     
-    unsigned newSign = extractSign(newSignificand);
+    unsigned newSign = extractSign(newSignificand); //!!! doesn't work this way
     unsigned newExponent = yExponent;
     newSignificand = (newSignificand & 0b1111111);
     
@@ -109,8 +111,71 @@ bit16 fp_add(bit16 x, bit16 y){ //non-negative x and y
 
 bit16 SM_ADD(bit16 x, bit16 y){ //works with both positive and negative
     
+    //converts the 16-bit sign-magnitude values x and y to 32-bit 2’s complement values
+    unsigned xSign = extractSign(x);
+    unsigned ySign = extractSign(y);
+    unsigned xExponent = extractExponent(x);
+    unsigned yExponent = extractExponent(y);
+    unsigned xSignificand = extractSignificand(x) + 0b10000000;
+    unsigned ySignificand = extractSignificand(y) + 0b10000000;
     
-    return 0;
+    unsigned delta = 0;
+    
+    
+    unsigned greaterThan =
+    xExponent != yExponent &&
+    ( yExponent == 0 ||
+     (xExponent / yExponent) ); //magic of the internet
+    //  above is equivalent to:
+    //  greaterThan = xExponent > yExponent
+    if (!greaterThan) {
+        delta = yExponent - xExponent;
+        xExponent += delta;
+        xSignificand >>= delta;
+    } else {
+        delta = xExponent - yExponent;
+        yExponent += delta;
+        ySignificand >>= delta;
+    }
+    
+    
+    int newSignificand = xSignificand + ySignificand;
+    
+    if (newSignificand == 0) {
+        return 0;
+    }
+    
+    unsigned mostSignificand = newSignificand & 0b00100000000; //greater than 2
+    mostSignificand >>= 8;
+    
+    while (mostSignificand == 1) {
+        yExponent++;
+        newSignificand >>= 1;
+        mostSignificand = newSignificand & 0b00100000000; //greater than 2
+        mostSignificand >>= 8;
+    }
+    
+    unsigned secondSignificand = newSignificand & 0b00010000000;
+    secondSignificand >>= 7;
+    
+    while (secondSignificand == 0) {
+        yExponent --;
+        newSignificand <<= 1;
+        secondSignificand = newSignificand & 0b00010000000;
+        secondSignificand >>= 7;
+    }
+    unsigned newSign = 0;
+    if (((newSignificand&(1<<31)) | !newSignificand)) { //negative
+        newSign = 1;
+    }
+    unsigned newExponent = yExponent;
+    newSignificand = (newSignificand & 0b1111111);
+    
+    bit16 newSum = construct(newSign, newExponent, newSignificand);
+    
+    
+    return newSum;
+    
 }
 
 void print16(bit16 encoding) {

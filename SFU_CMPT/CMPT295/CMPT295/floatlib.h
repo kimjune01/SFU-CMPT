@@ -20,7 +20,7 @@ unsigned extractSignificand(bit16 encoding);
 bit16 fp_add(bit16 x, bit16 y);
 void print16(bit16 encoding);
 void printSignificand (unsigned significand);
-
+bit16 SM_ADD(bit16 x, bit16 y);
 
 
 #endif /* floatlib_h */
