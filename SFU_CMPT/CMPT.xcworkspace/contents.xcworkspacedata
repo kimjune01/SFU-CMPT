@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:CMPT295/CMPT295.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CMPT225/CMPT225.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CMPT127/CMPT127.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CMPT125/OneTwoFive.xcodeproj">
+   </FileRef>
+</Workspace>
