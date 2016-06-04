@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A7195E231D03242B00B3787F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A7195E221D03242B00B3787F /* main.c */; };
+		A7195E2E1D0335AC00B3787F /* Lab1.c in Sources */ = {isa = PBXBuildFile; fileRef = A7195E2C1D0335AC00B3787F /* Lab1.c */; };
+		A7195E311D0335B800B3787F /* Lab2.c in Sources */ = {isa = PBXBuildFile; fileRef = A7195E2F1D0335B800B3787F /* Lab2.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		A7195E1F1D03242B00B3787F /* CMPT127 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMPT127; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7195E221D03242B00B3787F /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		A7195E2C1D0335AC00B3787F /* Lab1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Lab1.c; sourceTree = "<group>"; };
+		A7195E2D1D0335AC00B3787F /* Lab1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lab1.h; sourceTree = "<group>"; };
+		A7195E2F1D0335B800B3787F /* Lab2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Lab2.c; sourceTree = "<group>"; };
+		A7195E301D0335B800B3787F /* Lab2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lab2.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				A7195E221D03242B00B3787F /* main.c */,
+				A7195E2C1D0335AC00B3787F /* Lab1.c */,
+				A7195E2D1D0335AC00B3787F /* Lab1.h */,
+				A7195E2F1D0335B800B3787F /* Lab2.c */,
+				A7195E301D0335B800B3787F /* Lab2.h */,
 			);
 			path = CMPT127;
 			sourceTree = "<group>";
@@ -119,6 +129,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7195E231D03242B00B3787F /* main.c in Sources */,
+				A7195E311D0335B800B3787F /* Lab2.c in Sources */,
+				A7195E2E1D0335AC00B3787F /* Lab1.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +249,7 @@
 				A7195E281D03242B00B3787F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
