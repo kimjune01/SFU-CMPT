@@ -12,6 +12,6 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    testLab1();
+    testLab2();
     return 0;
 }
