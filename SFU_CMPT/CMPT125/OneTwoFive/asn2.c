@@ -164,7 +164,6 @@ int RecursiveBinarySearch(int arr[], int len, int target) {
     
 }
 
-//TODO: Adjust code to use two comparisons instead of three
 int IterativeBinarySearch(int arr[], int len, int target) {
     int first = 0;
     int last = len-1;
