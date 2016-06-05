@@ -168,27 +168,24 @@ int RecursiveBinarySearch(int arr[], int len, int target) {
 int IterativeBinarySearch(int arr[], int len, int target) {
     int first = 0;
     int last = len-1;
-    int found = 0;
-    //TODO: make two comparisons instead of three
-    //TODO: prove correctness
+    int found = -1;
     while (first <= last) {
-        //Assert: the target, if it is in the array, is between the first and last index
-        //all elements after the last index are greater than the target
-        //all elements before the first index are less than the target
-        int mid = first + (first-last) / 2;
-        found = target == arr[mid];
-
-        if (target == arr[mid]) {
-            return 1;
-        }
-        if (target < arr[mid]) {
-            last = mid-1;
-        } else {
+        // Assert: all elements before the first index are smaller than target
+        // all elements after the last index are larger than target
+        // if the target is in the array, then it is between first and last
+        int mid = (first+last) / 2;
+        if (target >= arr[mid]) {
             first = mid+1;
+        } else {
+            last = mid-1;
         }
+        // if equals, slips through. Exit loop.
+        found = 1;
+        break;
     }
-    return -1;
+    return found;
 }
+
 
 //TODO: Adjust code to use two comparisons instead of three
 int IterativeBinarySearch2(int arr[], int len, int target) {
@@ -201,6 +198,10 @@ int IterativeBinarySearch2(int arr[], int len, int target) {
          first <= last;
          first = mid+1) {
         
+        found = target == arr[mid];
+        if (target == arr[mid]) {
+            return 1;
+        }
         
         if (target < arr[mid]) {
             last = mid-1;
@@ -225,8 +226,8 @@ void asn2Test() {
     //insertionSort(randomArray, arraySize);
     SelectionSort(randomArray, arraySize);
     
-    printf("Recursive Search: %d\n", RecursiveBinarySearch(randomArray, arraySize, 5));
-    printf("Iterative Search: %d\n", IterativeBinarySearch(randomArray, arraySize, 5));
+    //printf("Recursive Search: %d\n", RecursiveBinarySearch(randomArray, arraySize, 5));
+    printf("Iterative Search: %d\n", IterativeBinarySearch(randomArray, arraySize, 6));
     
     
     

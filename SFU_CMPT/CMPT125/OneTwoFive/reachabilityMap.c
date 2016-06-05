@@ -99,9 +99,9 @@ void traverse(int mapSize,
 
 
 /*
- Runtime analysis:
+ __Runtime analysis__
  
- If the upper bound and the lower bound for the growth rate of f(n) are equal, then f ∈ O(lower bound/upper bound)
+ If the upper bound and the lower bound for the growth rate of f(n) are equal, then f ∈ O(lower and upper bound)
  
  Investigating an upper bound for f(n), we model the grid as a graph with coordinates as nodes and traversals as edges. For each additional node, there are at most two additional edges. 
  Proof by induction: 
