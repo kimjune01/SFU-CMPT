@@ -75,7 +75,7 @@ void insertionSort(int *array, int length) {
     //loop invariant: the array is sorted up to the sorted index.
 }
 
-
+//magic of the internet
 int getMaxIndex(int arr[], int m) {
     int maxIndex;
     if (m == 0) return m;
@@ -86,7 +86,7 @@ int getMaxIndex(int arr[], int m) {
 }
 
 //description: a recursive selection sort that runs in O(n^2)
-//precondition:
+//precondition: the array is not sorted from index 0 up to len-1
 //postcondition: the array is sorted
 void SelectionSort(int arr[], int len) {
     //trivial case. an array of length 1 is already sorted
@@ -103,7 +103,6 @@ void SelectionSort(int arr[], int len) {
         arr[len-1] = arr[maxIndex];
         //place the last element in the void
         arr[maxIndex] = lastElement;
-        printArray(arr, len);
     }
     //now that the last element is the greatest of the array,
     //make the next last element the greatest of its array.
@@ -148,6 +147,75 @@ int* create_array(char category, int length) {
     return array;
 }
 
+
+// Post:  Returns 1 iff target is in arr[0..len-1], 0 otherwise.
+int RecursiveBinarySearch(int arr[], int len, int target) {
+    //base case. Stop at len == 1 instead of == 0 to save on comparisons at the leaves
+    if (len == 1) return arr[0] == target;
+    int mid = len/2;
+    if (target < arr[mid]){
+        return RecursiveBinarySearch(arr, mid, target);
+    } else {
+        // the || operator short-circuits.
+        return target == arr[mid] || RecursiveBinarySearch(arr+mid+1, len-mid-1, target);
+    }
+    
+    
+    
+}
+
+//TODO: Adjust code to use two comparisons instead of three
+int IterativeBinarySearch(int arr[], int len, int target) {
+    int first = 0;
+    int last = len-1;
+    int found = 0;
+    //TODO: make two comparisons instead of three
+    //TODO: prove correctness
+    while (first <= last) {
+        //Assert: the target, if it is in the array, is between the first and last index
+        //all elements after the last index are greater than the target
+        //all elements before the first index are less than the target
+        int mid = first + (first-last) / 2;
+        found = target == arr[mid];
+
+        if (target == arr[mid]) {
+            return 1;
+        }
+        if (target < arr[mid]) {
+            last = mid-1;
+        } else {
+            first = mid+1;
+        }
+    }
+    return -1;
+}
+
+//TODO: Adjust code to use two comparisons instead of three
+int IterativeBinarySearch2(int arr[], int len, int target) {
+    int first = 0;
+    int last = len-1;
+    int found = 0;
+    
+    int mid = (first+last) / 2;
+    for (int first = 0;
+         first <= last;
+         first = mid+1) {
+        
+        
+        if (target < arr[mid]) {
+            last = mid-1;
+        } else {
+            first = mid+1;
+        }
+        mid = (first+last) / 2;
+        
+    }
+    
+    return -1;
+}
+
+
+
 void asn2Test() {
     int arraySize = 10;
     int* randomArray = create_array('r', arraySize);
@@ -157,7 +225,9 @@ void asn2Test() {
     //insertionSort(randomArray, arraySize);
     SelectionSort(randomArray, arraySize);
     
+    printf("Recursive Search: %d\n", RecursiveBinarySearch(randomArray, arraySize, 5));
+    printf("Iterative Search: %d\n", IterativeBinarySearch(randomArray, arraySize, 5));
     
-    printArray(randomArray, arraySize);
+    
     
 }
