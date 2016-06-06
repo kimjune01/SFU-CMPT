@@ -75,40 +75,7 @@ void insertionSort(int *array, int length) {
     //loop invariant: the array is sorted up to the sorted index.
 }
 
-//magic of the internet
-int getMaxIndex(int arr[], int m) {
-    int maxIndex;
-    if (m == 0) return m;
-    maxIndex = getMaxIndex(arr, m-1);
-    if (arr[m] > arr[maxIndex]) return m;
-    return maxIndex;
-    
-}
 
-//description: a recursive selection sort that runs in O(n^2)
-//precondition: the array is not sorted from index 0 up to len-1
-//postcondition: the array is sorted
-void SelectionSort(int arr[], int len) {
-    //trivial case. an array of length 1 is already sorted
-    if (len == 1) {
-        return;
-    }
-    //select the maximum
-    int maxIndex = getMaxIndex(arr, len-1);
-    //swap the maximum with the last element if needed
-    if (maxIndex != len-1) {
-        //temporarily store the last element
-        int lastElement = arr[len-1];
-        //place the max element in its place
-        arr[len-1] = arr[maxIndex];
-        //place the last element in the void
-        arr[maxIndex] = lastElement;
-    }
-    //now that the last element is the greatest of the array,
-    //make the next last element the greatest of its array.
-    SelectionSort(arr, len-1);
-    
-}
 
 
 
@@ -126,7 +93,6 @@ int* create_array(char category, int length) {
         }
         return array;
     }
-    
     if (category == 'r') {
         time_t t;
         srand((unsigned) time(&t));
@@ -140,94 +106,38 @@ int* create_array(char category, int length) {
         }
         return array;
     }
-    
-    
-    
-    
     return array;
 }
 
 
-// Post:  Returns 1 iff target is in arr[0..len-1], 0 otherwise.
-int RecursiveBinarySearch(int arr[], int len, int target) {
-    //base case. Stop at len == 1 instead of == 0 to save on comparisons at the leaves
-    if (len == 1) return arr[0] == target;
-    int mid = len/2;
-    if (target < arr[mid]){
-        return RecursiveBinarySearch(arr, mid, target);
-    } else {
-        // the || operator short-circuits.
-        return target == arr[mid] || RecursiveBinarySearch(arr+mid+1, len-mid-1, target);
-    }
-    
-    
-    
-}
-
-int IterativeBinarySearch(int arr[], int len, int target) {
-    int first = 0;
-    int last = len-1;
-    int found = -1;
-    while (first <= last) {
-        // Assert: all elements before the first index are smaller than target
-        // all elements after the last index are larger than target
-        // if the target is in the array, then it is between first and last
-        int mid = (first+last) / 2;
-        if (target >= arr[mid]) {
-            first = mid+1;
-        } else {
-            last = mid-1;
-        }
-        // if equals, slips through. Exit loop.
-        found = 1;
-        break;
-    }
-    return found;
-}
-
-
-//TODO: Adjust code to use two comparisons instead of three
-int IterativeBinarySearch2(int arr[], int len, int target) {
-    int first = 0;
-    int last = len-1;
-    int found = 0;
-    
-    int mid = (first+last) / 2;
-    for (int first = 0;
-         first <= last;
-         first = mid+1) {
-        
-        found = target == arr[mid];
-        if (target == arr[mid]) {
-            return 1;
-        }
-        
-        if (target < arr[mid]) {
-            last = mid-1;
-        } else {
-            first = mid+1;
-        }
-        mid = (first+last) / 2;
-        
-    }
-    
-    return -1;
-}
-
 
 
 void asn2Test() {
-    int arraySize = 10;
-    int* randomArray = create_array('r', arraySize);
-    printArray(randomArray, arraySize);
-    
     //bubbleSort(randomArray, arraySize);
     //insertionSort(randomArray, arraySize);
-    SelectionSort(randomArray, arraySize);
     
-    //printf("Recursive Search: %d\n", RecursiveBinarySearch(randomArray, arraySize, 5));
-    printf("Iterative Search: %d\n", IterativeBinarySearch(randomArray, arraySize, 6));
+    printf("enter 'b' for bubble sort, 'i' for insertion sort");
+    char algorithm = getchar();
+    int arraySize;
+    printf("enter array size");
+    scanf("%d",&arraySize);
+    printf("enter 's' for sorted, 'v' for reverse sorted, or 'r' for random");
+    char arrayType = getchar();
+    int* theArray = create_array(arrayType, arraySize);
+    
+    if (algorithm == 'b') {
+        bubbleSort(theArray, arraySize);
+    } else if (algorithm == 'i') {
+        insertionSort(theArray, arraySize);
+    }
     
     
     
+    
+}
+
+int main() {
+    asn2Test();
+    
+    return 0;
 }
