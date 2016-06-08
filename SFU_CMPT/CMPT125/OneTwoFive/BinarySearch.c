@@ -1,13 +1,24 @@
 //
-//  BinarySearch.c
+//  main.c
 //  OneTwoFive
 //
-//  Created by June Kim on 2016-06-05.
+//  Created by June Kim on 2016-05-17.
 //  Copyright © 2016 June Kim. All rights reserved.
 //
 
-#include "BinarySearch.h"
+#include <stdio.h>
+#include <assert.h>
+#include <stdbool.h>
+#include <math.h>
 #include <stdlib.h>
+
+
+void printArray(int *array, int length) {
+    for (int i = 0; i < length; i++) {
+        printf("%d, ", array[i]);
+    }
+    printf("\n");
+}
 
 int* create_array( int length) {
     int *array = (int *)malloc(length * sizeof(int));
@@ -20,8 +31,7 @@ int* create_array( int length) {
 
 // Post: Returns 1 iff target is in arr[0..len-1], 0 otherwise.
 int RecursiveBinarySearch(int arr[], int len, int target) {
-    //base case. Stop at len == 1 instead of == 0 to save on comparisons at the leaves
-    if (len == 1) return arr[0] == target;
+    if (len == 0) return 0;
     int mid = len/2;
     if (target < arr[mid]){
         return RecursiveBinarySearch(arr, mid, target);
@@ -55,26 +65,27 @@ int IterativeBinarySearch(int arr[], int len, int target) {
     
     return -1;
 }
-
 void testSearch(int arraySize) {
     
     int *sortedArray = create_array(arraySize);
     
-    for (int i = 0; i < 10000000; i *= 2) {
+    printArray(sortedArray, arraySize);
+    
+    for (int i = 1; i < 10000000; i *= 2) {
+        printf("i: %d \n", i);
+        
         printf("Recursive Search result: %d\n", RecursiveBinarySearch(sortedArray, arraySize, i));
         printf("Iterative Search result: %d\n", IterativeBinarySearch(sortedArray, arraySize, i));
     }
-
-
+    
+    
 }
-
-int main() {
-    testSearch(1);
+int main(int argc, const char * argv[]) {
     testSearch(10);
     testSearch(100);
     testSearch(1000);
     testSearch(10000);
     testSearch(100000);
+    testSearch(1000000);
     return 0;
 }
-

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A7013E9C1CEB9D6E0043A9CF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A7013E9B1CEB9D6E0043A9CF /* main.c */; };
-		A72C98411D050271009B76A1 /* SelectionSort.c in Sources */ = {isa = PBXBuildFile; fileRef = A72C983F1D050271009B76A1 /* SelectionSort.c */; };
-		A7EF3E961D03866400558508 /* asn2.c in Sources */ = {isa = PBXBuildFile; fileRef = A7EF3E941D03866400558508 /* asn2.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +26,9 @@
 		A7013E981CEB9D6E0043A9CF /* OneTwoFive */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OneTwoFive; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7013E9B1CEB9D6E0043A9CF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A72C983B1D050033009B76A1 /* BinarySearch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BinarySearch.c; sourceTree = "<group>"; };
-		A72C983C1D050033009B76A1 /* BinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinarySearch.h; sourceTree = "<group>"; };
 		A72C983F1D050271009B76A1 /* SelectionSort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SelectionSort.c; sourceTree = "<group>"; };
-		A72C98401D050271009B76A1 /* SelectionSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionSort.h; sourceTree = "<group>"; };
 		A75067381D04BC5A0085D5D1 /* reachabilityMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reachabilityMap.c; sourceTree = "<group>"; };
-		A7EF3E941D03866400558508 /* asn2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asn2.c; sourceTree = "<group>"; };
-		A7EF3E951D03866400558508 /* asn2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn2.h; sourceTree = "<group>"; };
+		A7EF3E941D03866400558508 /* asn2problem1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asn2problem1.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,13 +62,10 @@
 			isa = PBXGroup;
 			children = (
 				A7013E9B1CEB9D6E0043A9CF /* main.c */,
-				A7EF3E941D03866400558508 /* asn2.c */,
-				A7EF3E951D03866400558508 /* asn2.h */,
+				A7EF3E941D03866400558508 /* asn2problem1.c */,
 				A75067381D04BC5A0085D5D1 /* reachabilityMap.c */,
 				A72C983F1D050271009B76A1 /* SelectionSort.c */,
-				A72C98401D050271009B76A1 /* SelectionSort.h */,
 				A72C983B1D050033009B76A1 /* BinarySearch.c */,
-				A72C983C1D050033009B76A1 /* BinarySearch.h */,
 			);
 			path = OneTwoFive;
 			sourceTree = "<group>";
@@ -134,9 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A72C98411D050271009B76A1 /* SelectionSort.c in Sources */,
 				A7013E9C1CEB9D6E0043A9CF /* main.c in Sources */,
-				A7EF3E961D03866400558508 /* asn2.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

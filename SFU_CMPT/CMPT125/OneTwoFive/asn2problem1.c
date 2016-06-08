@@ -1,12 +1,5 @@
-//
-//  asn2.c
-//  OneTwoFive
-//
-//  Created by June Kim on 2016-06-04.
-//  Copyright © 2016 June Kim. All rights reserved.
-//
 
-#include "asn2.h"
+
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
@@ -116,20 +109,11 @@ void asn2Test() {
     //bubbleSort(randomArray, arraySize);
     //insertionSort(randomArray, arraySize);
     
-    printf("enter 'b' for bubble sort, 'i' for insertion sort");
-    char algorithm = getchar();
-    int arraySize;
-    printf("enter array size");
-    scanf("%d",&arraySize);
-    printf("enter 's' for sorted, 'v' for reverse sorted, or 'r' for random");
-    char arrayType = getchar();
-    int* theArray = create_array(arrayType, arraySize);
+    int arraySize = 100000;
+    int* theArray = create_array('r', arraySize); //s v r
     
-    if (algorithm == 'b') {
-        bubbleSort(theArray, arraySize);
-    } else if (algorithm == 'i') {
-        insertionSort(theArray, arraySize);
-    }
+//    bubbleSort(theArray, arraySize);
+    insertionSort(theArray, arraySize);
     
     
     

@@ -6,11 +6,10 @@
 //  Copyright © 2016 June Kim. All rights reserved.
 //
 
-#include "SelectionSort.h"
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
-
+#include <stdio.h>
 
 void printArray(int *array, int length) {
     for (int i = 0; i < length; i++) {

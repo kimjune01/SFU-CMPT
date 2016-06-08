@@ -7,6 +7,13 @@
 //
 
 #include "Lab2.h"
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <assert.h>
+
 
 void printArray(int arr[], unsigned int len);
 
@@ -17,7 +24,6 @@ int identical( int a[], int b[], unsigned int len ){ //identical.c
         if (a[i] != b[i]){
             same = 0;
         }
-        
     }
     return same;
 }
@@ -111,37 +117,269 @@ int contains( char* phrase, char* word ) { //contains.c
     return 0;
 }
 
-int redirection() {
+int count() { //main() in count.c
+    unsigned long chars = 0;
+    unsigned long lines = 0;
+    unsigned long words = 0;
+    int boolean= 0;
+    int counter;
+    while ( (counter = getchar()) != EOF){
+        chars++;
+        if (counter == ' '){
+            boolean=0;
+        } else if(boolean==0){
+            words++;
+            boolean=1;
+        }
+        if (counter=='\n'){
+            lines++;
+        }
+    }
+    printf( "%lu %lu %lu\n", chars, words, lines );
+    
+    return 0;
+}
+
+int compare(char* oneWord, char* otherWord) {
+    char oneWordCopy[128];
+    strcpy(oneWordCopy, oneWord);
+    char otherWordCopy[128];
+    strcpy(otherWordCopy, otherWord);
+    
+    for (int i = 0; i < 128; i++) {
+        if (oneWordCopy[i] != otherWordCopy[i]) {
+            return 0;
+        }
+        if (oneWordCopy[i] == 0) {
+            return 1;
+        }
+    }
+    return 1;
+}
+
+char *changewords_1 (char *sentence, char *find, char *replace)
+{
+    char *dest = malloc (strlen(sentence)-strlen(find)+strlen(replace)+1);
+    char *destptr = dest;
+    
+    *dest = 0;
+    
+    while (*sentence)
+    {
+        if (!strncmp (sentence, find, strlen(find)))
+        {
+            strcat (destptr, replace);
+            sentence += strlen(find);
+            destptr += strlen(replace);
+        } else
+        {
+            *destptr = *sentence;
+            destptr++;
+            sentence++;
+        }
+    }
+    *destptr = 0;
+    return dest;
+}
+
+char *replace_str(char *str, char *orig, char *rep, int start)
+{
+    static char temp[4096];
+    static char buffer[4096];
+    char *p;
+    
+    strcpy(temp, str + start);
+    
+    if(!(p = strstr(temp, orig)))  // Is 'orig' even in 'temp'?
+        return temp;
+    
+    strncpy(buffer, temp, p-temp); // Copy characters from 'temp' start to 'orig' str
+    buffer[p-temp] = '\0';
+    
+    sprintf(buffer + (p - temp), "%s%s", rep, p + strlen(orig));
+    sprintf(str + start, "%s", buffer);
+    
+    return str;
+}
+
+char* concat(char *s1, char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
+    //in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+int censor( int argc, char* argv[] ) { //main in letterfreq.c
+    //load censored words into memory
+    int censoredWordsCount = argc - 1;
+    char* censoredWords[] = {};
+    for (int i = 0; i < censoredWordsCount; i++) {
+        censoredWords[i] = argv[i+1];
+    }
+    
+    //load the whole text into memory
+    char wholeText[9999];
+    
+    for ( char byte = getchar(); byte != EOF; byte = getchar() ) {
+        strcat(wholeText, &byte);
+        // Outputs to stdout the byte.
+        
+    }
+    printf("%s", wholeText);
+    
+    //magic of the internet
+    char* newString = NULL;
+    for (int i = 0; i < censoredWordsCount; i++) {
+        newString = replace_str(wholeText, censoredWords[i], "CENSORED", 0);
+    }
+    printf("%s", newString);
+    
+    char *line = NULL;
+    char lineCopy[2048];
+    size_t size;
+    
+    //getline
+    //said hamlet to Ophelia
+    while (getline(&line, &size, stdin) != EOF) { //getLine
+        //for each line
+        strcpy(lineCopy, line);
+        for (int i = 0; i < censoredWordsCount; i++) {
+            char* newLine = changewords_1(lineCopy, censoredWords[i], "CENSORED");
+            printf("newLine: %s\n", newLine);
+        }
+        printf("\n");
+    }
+    
+    
+
+    
+    
+
+    return 1;
+    
+    unsigned long chars = 0;
+    unsigned long lines = 0;
+    unsigned long words = 0;
+    int boolean= 0;
+    int counter;
+    
+    char * pch = "";
+    
+    while ( (counter = getchar()) != EOF){
+        chars++;
+        if (counter == ' '){
+            boolean=0;
+        } else if(boolean==0){
+            //is a word
+            words++;
+            boolean=1;
+        }
+        if (counter=='\n'){
+            lines++;
+        }
+    }
+    
+    return 0;
+}
+
+/*    
+ char *line = NULL;
+ size_t size;
+ char *pch;
+ while (getline(&line, &size, stdin) != EOF) {
+ pch = strtok (line, " ,.-");
+ if (pch[0] == '\n' || pch[0] == ' ') {
+ continue;
+ }
+ while (pch != NULL){
+ //pch[strlen(pch)-1] = 0;
+ int value = atoi(pch);
+ printHashLine(value);
+ pch = strtok (NULL, " ,.-");
+ if (pch != NULL) {
+ if (pch[0] == '\n' || pch[0] == ' ') {
+ continue;
+ }
+ 
+ }
+ printf("\n");
+ 
+ }
+ }
+ */
+
+int letterFrequency() {
     /*
-     counts the number of characters, words and lines read from standard input until EOF.
-     Assume ASCII text of any length.
-     Every byte counts as a character except EOF.
-     Words are sequences of letters and the apostrophe.
-     Lines are separated by newline characters ('\n').
-     Characters beyond the final newline character will not be included in the line count.
-     On EOF, printf( "%lu %lu %lu\n", charcount, wordcount, linecount );
-     
+     Write a program that calculates the frequency of letter occurrences in text.
+     Read ASCII text from standard input.
+     On reaching EOF, print to stdout the normalized frequency of occurrence for each letter a-z that appeared in the input, one per line, in alphabetical order using the format produced by
+     printf( "%c %.4f\n", letter, freq);
+     Letters that occur zero times should not appear in the output.
+     Characters other than lower and upper case letters should be ignored.
+     Lower and upper case instances count as the same letter, e.g. 'a' and 'A' are both reported for the letter 'a' on the output.
+     The frequencies reported should sum to approximately 1 (with a little slack for accumulation of printf rounding errors).
      */
     return 0;
 }
 
-int t7_2() {
+int t9_2() { //verticalgraph.c
+    /*
+     Read integer values from stdin, separated by one or more spaces or newlines, until reaching EOF.
+     The input is guaranteed to be well-formed.
+     The input contains no more than 80 values.
+     On standard output, render a simple vertical column graph representation of the input values, in order left to right, using hash '#' characters as shown in the examples below. The number of hashes printed in each column should be equal to the corresponding input value.
+     The area above a completed column should be filled with space characters.
+     Ignore empty lines. Do not output a column for an empty line.
+     The entire graph must end with a newline character.
+     */
+     
+    return 0;
+}
+
+int InRectangle( float pt[2], float rect[4] ) { //inrect.c
     
     return 0;
 }
 
-int t8_2() {
+int inRectangleTest() {
+    // define a rectangle from (1,1) to (2,2)
+    float rect[4] = {1.0, 1.0, 2.0, 2.0 };
     
-    return 0;
-}
-
-int t9_2() {
+    // define a point that is inside the rectangle
+    float p_in[2] = { 1.5, 1.5 };
     
-    return 0;
-}
-
-int t10_2() {
+    // define a point that is outside the rectangle
+    float p_out[2] = {2.5, 0.5};
     
+    // define a point that is on the edge of the rectangle
+    float p_edge[2] = {1.0, 1.0};
+    
+    // InRectangle() should return 0 (false) for points that are NOT in
+    // the rectangle, and non-zero (true) for points that are in the
+    // rectangle. Points on the edge are considered *in* the rectangle.
+    
+    // test 1
+    if( InRectangle( p_in, rect ) == 0 )
+    {
+        puts( "error: should return true for p_in." );
+        return 1; // indicate error
+    }
+    
+    // test 2
+    if( InRectangle( p_out, rect ) != 0 )
+    {
+        puts( "error: should return false for p_out." );
+        return 1; // indicate error
+    }
+    
+    // test 3
+    if( InRectangle( p_edge, rect ) == 0 )
+    {
+        puts( "error: should return true for p_edge." );
+        return 1; // indicate error
+    }
     return 0;
 }
 
@@ -153,35 +391,44 @@ void printArray(int arr[], unsigned int len) {
     printf("\n");
 }
 
+int containsTest( int argc, char* argv[ ] ){
+    // Write a program called "contains" that takes two text strings as arguments
+    // and prints "true" followed by a newline if the second string is entirely
+    // contained within the first, or "false" followed by a newline otherwise.
+    if ( argc != 3 ) // yes 3! argv[0] is the program name
+        // printf( "I wanted 2 arguments\n" );
+        printf("false\n");
+    else {
+        // The strings contain only ASCII characters and may be any length > 0 characters.
+        // Strings in argv are always null-terminated.
+        if ( (strlen(argv[1]) == 0) || (strlen(argv[2]) == 0) )
+            printf("false\n");
+        else {
+            if ( contains(argv[1], argv[2]) )
+                // result = 0;
+                printf("true\n");
+            else 
+                printf("false\n");
+        }
+    }
+    return 0;
+}
+
 void testLab2(){
-    int array[] = {1, 2, 3, 4, 5, 6};
-    int barry[] = {1, 2, 3, 4, 5, 6};
-    unsigned int carry[] = {1, 2, 3, 4, 5, 6};
-    unsigned int dairy[] = {1, 2, 3, 4, 5, 6};
-//    printArray(array, 6);
-//    reverse(array, 6);
-//    printArray(array, 6);
+    char* this = "this";
+    char* that = "that";
+    //
+//    printf("compare this and that: %d\n", compare(this,that));
+//    
+//    printf("compare this and this: %d\n", compare(this, this));
     
-//    printf("Do the two arrays contain the same elements?\n");
-//    if(scrambled(carry, dairy, 6)) {
-//        printf("Yes!\n");
-//    } else {
-//        printf("No.\n");
-//        
-//    }
+//    char *testContainsInput[] = {"contains", "I have a really bad feeling about this", "bad feeling"};
+//    containsTest(3, testContainsInput);
     
     //
-    char *walrusPhrase = "I have a really bad feeling about this";
-    char *walrusWord = "bad feeling";
+    char* testInput[] = {"censor", "Ophelia"};
+    censor(3, testInput);
+
     
-    char *hamletPhrase = "To be or not to be";
-    char *hamletWord = "That is the question";
-    
-    printf("Does this phrase contain that word? \n");
-    if (contains(hamletPhrase, hamletWord)) {
-        printf("Yes!\n");
-    } else {
-        printf("No.\n");
-    }
-    
+//    inRectangleTest()
 }
