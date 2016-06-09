@@ -211,73 +211,53 @@ char* concat(char *s1, char *s2)
     return result;
 }
 
+
 int censor( int argc, char* argv[] ) { //main in letterfreq.c
     //load censored words into memory
-    int censoredWordsCount = argc - 1;
     char* censoredWords[] = {};
-    for (int i = 0; i < censoredWordsCount; i++) {
+    for (int i = 0; i < argc - 1; i++) {
         censoredWords[i] = argv[i+1];
     }
     
-    //load the whole text into memory
-    char wholeText[9999];
+    char cursor;
     
-    for ( char byte = getchar(); byte != EOF; byte = getchar() ) {
-        strcat(wholeText, &byte);
-        // Outputs to stdout the byte.
-        
-    }
-    printf("%s", wholeText);
-    
-    //magic of the internet
-    char* newString = NULL;
-    for (int i = 0; i < censoredWordsCount; i++) {
-        newString = replace_str(wholeText, censoredWords[i], "CENSORED", 0);
-    }
-    printf("%s", newString);
-    
-    char *line = NULL;
-    char lineCopy[2048];
-    size_t size;
-    
-    //getline
-    //said hamlet to Ophelia
-    while (getline(&line, &size, stdin) != EOF) { //getLine
-        //for each line
-        strcpy(lineCopy, line);
-        for (int i = 0; i < censoredWordsCount; i++) {
-            char* newLine = changewords_1(lineCopy, censoredWords[i], "CENSORED");
-            printf("newLine: %s\n", newLine);
-        }
-        printf("\n");
-    }
-    
-    
-
-    
-    
-
-    return 1;
-    
-    unsigned long chars = 0;
-    unsigned long lines = 0;
-    unsigned long words = 0;
-    int boolean= 0;
-    int counter;
-    
-    char * pch = "";
-    
-    while ( (counter = getchar()) != EOF){
-        chars++;
-        if (counter == ' '){
-            boolean=0;
-        } else if(boolean==0){
-            //is a word
-            words++;
-            boolean=1;
-        }
-        if (counter=='\n'){
-            lines++;
+    char * pch;
+    char word[128];
+    char choppedWord[128];
+    char delimiter;
+    int charCounter = 0;
+    //Said Hamlet to Ophelia, Said Hamlet to Ophelia,
+    //Said Hamlet to Ophelia,
+    //Said Hamlet to Ophelia,
+    while ( (cursor = getchar()) != EOF){
+        word[charCounter++] = cursor;
+        //store word until delimiter
+        if (cursor == ' ' || cursor == '.' || cursor == ',' || cursor == '-' || cursor == 'n') {
+            //detect word
+            for (int i = 0; i < charCounter-1; i++) {
+                choppedWord[i] = word[i];
+            }
+            delimiter = cursor;
+            //if word matches
+            int match = 0;
+            for (int i = 0; i < argc - 1; i++) {
+                if (strcmp(choppedWord, censoredWords[i]) == 0) {
+                    match = 1;
+                    break;
+                }
+            }
+            if (match) {
+                //print CENSORED + delimiter
+                printf("CENSORED%c", delimiter);
+            } else {
+                printf("%s%c", choppedWord, delimiter);
+            }
+            //purge words and counter
+            charCounter = 0;
+            for (int i = 0; i < 128; i++) {
+                choppedWord[i] = '\0';
+                word[i] = '\0';
+            }
         }
     }
     
@@ -427,7 +407,7 @@ void testLab2(){
     
     //
     char* testInput[] = {"censor", "Ophelia"};
-    censor(3, testInput);
+    censor(2, testInput);
 
     
 //    inRectangleTest()
