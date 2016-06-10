@@ -290,7 +290,7 @@ int censor( int argc, char* argv[] ) { //main in letterfreq.c
  }
  */
 
-int letterFrequency() {
+int letterFrequency() { //lfreq
     /*
      Write a program that calculates the frequency of letter occurrences in text.
      Read ASCII text from standard input.
@@ -301,6 +301,34 @@ int letterFrequency() {
      Lower and upper case instances count as the same letter, e.g. 'a' and 'A' are both reported for the letter 'a' on the output.
      The frequencies reported should sum to approximately 1 (with a little slack for accumulation of printf rounding errors).
      */
+    
+    int c = 0, count[26] = {0};
+    int accum = 0;
+    
+    char cursor;
+    
+    
+    while ( (cursor = getchar()) != EOF )
+    {
+        
+        if ( cursor >= 'a' && cursor <= 'z' ){
+            count[cursor-'a']++;
+            accum++;
+        }
+        
+        else if (cursor >= 'A' && cursor <= 'Z'){
+            count[cursor -'A']++;
+            accum++;
+        }
+        c++;
+    }
+    
+    for ( c = 0 ; c < 26 ; c++ )
+    {
+        if( count[c] != 0 )
+            printf( "%c %.4f\n", c+'a', ((double)count[c])/accum);
+    }
+    
     return 0;
 }
 
@@ -314,7 +342,47 @@ int t9_2() { //verticalgraph.c
      Ignore empty lines. Do not output a column for an empty line.
      The entire graph must end with a newline character.
      */
-     
+    int input[80];
+    int maxInput = 0;
+    char *line = NULL;
+    size_t size;
+    char *pch;
+    int inputCount = 0;
+    while (getline(&line, &size, stdin) != EOF) {
+        pch = strtok (line, " ,.-\n");
+        while (pch != NULL){
+            int value = atoi(pch);
+            //append value to input
+            input[inputCount++] = value;
+            pch = strtok (NULL, " ,.-\n");
+            
+        }
+    }
+    
+    
+    for (int i = 0; i < inputCount; i++) {
+        if (input[i] > maxInput) {
+            maxInput = input[i];
+        }
+    }
+    //
+    
+    
+    //decrement and print
+    for (int i = maxInput; i > 0; i--) {
+        for (int j = 0; j < inputCount; j++) {
+            if (input[j] == maxInput) {
+                input[j]--;
+                
+                printf("#");
+            } else {
+                printf(" ");
+            }
+        }
+        maxInput--;
+        printf("\n");
+    }
+    
     return 0;
 }
 
@@ -406,9 +474,12 @@ void testLab2(){
 //    containsTest(3, testContainsInput);
     
     //
-    char* testInput[] = {"censor", "Ophelia"};
-    censor(2, testInput);
+//    char* testInput[] = {"censor", "Ophelia"};
+//    censor(2, testInput);
 
+//    letterFrequency();
+    
+    t9_2();
     
 //    inRectangleTest()
 }
