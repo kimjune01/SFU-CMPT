@@ -77,7 +77,7 @@ int scrambled( unsigned int a[], unsigned int b[], unsigned int len ) {
     return 1;
 }
 
-int contains( char* phrase, char* word ) { //contains.c
+int containsHelper( char* phrase, char* word ) { //contains.c
     //ascii
     //print true if the word is contained by the phrase
     
@@ -116,6 +116,31 @@ int contains( char* phrase, char* word ) { //contains.c
     printf("false\n");
     return 0;
 }
+
+
+int contains( int argc, char* argv[ ] ){
+    // Write a program called "contains" that takes two text strings as arguments
+    // and prints "true" followed by a newline if the second string is entirely
+    // contained within the first, or "false" followed by a newline otherwise.
+    if ( argc != 3 ) // yes 3! argv[0] is the program name
+        // printf( "I wanted 2 arguments\n" );
+        printf("false\n");
+    else {
+        // The strings contain only ASCII characters and may be any length > 0 characters.
+        // Strings in argv are always null-terminated.
+        if ( (strlen(argv[1]) == 0) || (strlen(argv[2]) == 0) )
+            printf("false\n");
+        else {
+            if ( contains(argv[1], argv[2]) )
+                // result = 0;
+                printf("true\n");
+            else
+                printf("false\n");
+        }
+    }
+    return 0;
+}
+
 
 int count() { //main() in count.c
     unsigned long chars = 0;
@@ -439,39 +464,16 @@ void printArray(int arr[], unsigned int len) {
     printf("\n");
 }
 
-int containsTest( int argc, char* argv[ ] ){
-    // Write a program called "contains" that takes two text strings as arguments
-    // and prints "true" followed by a newline if the second string is entirely
-    // contained within the first, or "false" followed by a newline otherwise.
-    if ( argc != 3 ) // yes 3! argv[0] is the program name
-        // printf( "I wanted 2 arguments\n" );
-        printf("false\n");
-    else {
-        // The strings contain only ASCII characters and may be any length > 0 characters.
-        // Strings in argv are always null-terminated.
-        if ( (strlen(argv[1]) == 0) || (strlen(argv[2]) == 0) )
-            printf("false\n");
-        else {
-            if ( contains(argv[1], argv[2]) )
-                // result = 0;
-                printf("true\n");
-            else 
-                printf("false\n");
-        }
-    }
-    return 0;
-}
-
 void testLab2(){
     char* this = "this";
     char* that = "that";
     //
-//    printf("compare this and that: %d\n", compare(this,that));
-//    
-//    printf("compare this and this: %d\n", compare(this, this));
+    printf("compare this and that: %d\n", compare(this,that));
+//
+    printf("compare this and this: %d\n", compare(this, this));
     
-//    char *testContainsInput[] = {"contains", "I have a really bad feeling about this", "bad feeling"};
-//    containsTest(3, testContainsInput);
+    char *testContainsInput[] = {"contains", "I have a really bad feeling about this", "bad feeling"};
+    contains(3, testContainsInput);
     
     //
 //    char* testInput[] = {"censor", "Ophelia"};
@@ -479,7 +481,7 @@ void testLab2(){
 
 //    letterFrequency();
     
-    t9_2();
+//    t9_2();
     
 //    inRectangleTest()
 }

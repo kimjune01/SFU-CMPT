@@ -8,13 +8,16 @@
 
 #include <stdio.h>
 #include "floatlib.h"
+#include "converter.h"
+#include "converterAssembly.s"
 
 void fp_add_test();
+void converter_test();
 
 int main(int argc, const char * argv[]) {
     
-    
-    fp_add_test();
+    converter_test();
+//    fp_add_test();
     
     return 0;
 }
@@ -22,6 +25,38 @@ int main(int argc, const char * argv[]) {
 void printhex(bit16 x){
     printf("%.4x  ", x);
 }
+
+void converter_test() {
+    int result;
+    
+    char* minusOneFourNine = "-149";
+    printf("minusOneFourNine: %s\n", minusOneFourNine);
+    result = converter(minusOneFourNine);
+    printf("minusOneFourNine: %d\n\n", result);
+    
+    char* minusTen = "-10";
+    printf("minusTen: %s\n", minusTen);
+    result = converter(minusTen);
+    printf("minusTen: %d\n\n", result);
+    
+    char* allDigits = "1234567890";
+    printf("allDigits: %s\n", allDigits);
+    result = converter(allDigits);
+    printf("allDigits: %d\n\n", result);
+    
+    char* minusNines = "-999999999999";
+    printf("minusNines: %s\n", minusNines);
+    result = converter(minusNines);
+    printf("minusNines: %d\n\n", result);
+    
+    char* zero = "0";
+    printf("zero: %s\n", zero);
+    result = converter(zero);
+    printf("zero: %d\n\n", result);
+
+}
+
+
 
 void fp_add_test() {
     unsigned bias = 0b01111111;

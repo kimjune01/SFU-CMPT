@@ -10,6 +10,12 @@
 		A7443BD11CFF2AC2007B4D2F /* Profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7443BCF1CFF2AC2007B4D2F /* Profile.cpp */; };
 		A7443BD41CFF2B05007B4D2F /* FriendsBook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7443BD21CFF2B05007B4D2F /* FriendsBook.cpp */; };
 		A7443BD71CFF2B1A007B4D2F /* MyADT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7443BD51CFF2B1A007B4D2F /* MyADT.cpp */; };
+		A75D86041D124C9E004AC48E /* BankSimApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D86021D124C9E004AC48E /* BankSimApp.cpp */; };
+		A75D86071D124CDB004AC48E /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D86051D124CDB004AC48E /* Queue.cpp */; };
+		A75D860A1D124CEB004AC48E /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D86081D124CEB004AC48E /* Event.cpp */; };
+		A75D860D1D124D10004AC48E /* PQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D860B1D124D10004AC48E /* PQueue.cpp */; };
+		A75D86101D124D2E004AC48E /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D860E1D124D2E004AC48E /* Node.cpp */; };
+		A75D86131D124E94004AC48E /* EmptyDataCollectionException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A75D86111D124E94004AC48E /* EmptyDataCollectionException.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +38,18 @@
 		A7443BD31CFF2B05007B4D2F /* FriendsBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsBook.h; sourceTree = "<group>"; };
 		A7443BD51CFF2B1A007B4D2F /* MyADT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyADT.cpp; sourceTree = "<group>"; };
 		A7443BD61CFF2B1A007B4D2F /* MyADT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyADT.h; sourceTree = "<group>"; };
+		A75D86021D124C9E004AC48E /* BankSimApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BankSimApp.cpp; sourceTree = "<group>"; };
+		A75D86031D124C9E004AC48E /* BankSimApp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BankSimApp.hpp; sourceTree = "<group>"; };
+		A75D86051D124CDB004AC48E /* Queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Queue.cpp; sourceTree = "<group>"; };
+		A75D86061D124CDB004AC48E /* Queue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Queue.hpp; sourceTree = "<group>"; };
+		A75D86081D124CEB004AC48E /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
+		A75D86091D124CEB004AC48E /* Event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Event.hpp; sourceTree = "<group>"; };
+		A75D860B1D124D10004AC48E /* PQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PQueue.cpp; sourceTree = "<group>"; };
+		A75D860C1D124D10004AC48E /* PQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PQueue.hpp; sourceTree = "<group>"; };
+		A75D860E1D124D2E004AC48E /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		A75D860F1D124D2E004AC48E /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		A75D86111D124E94004AC48E /* EmptyDataCollectionException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmptyDataCollectionException.cpp; sourceTree = "<group>"; };
+		A75D86121D124E94004AC48E /* EmptyDataCollectionException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EmptyDataCollectionException.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +88,18 @@
 				A7443BD31CFF2B05007B4D2F /* FriendsBook.h */,
 				A7443BD51CFF2B1A007B4D2F /* MyADT.cpp */,
 				A7443BD61CFF2B1A007B4D2F /* MyADT.h */,
+				A75D86021D124C9E004AC48E /* BankSimApp.cpp */,
+				A75D86031D124C9E004AC48E /* BankSimApp.hpp */,
+				A75D86051D124CDB004AC48E /* Queue.cpp */,
+				A75D86061D124CDB004AC48E /* Queue.hpp */,
+				A75D860B1D124D10004AC48E /* PQueue.cpp */,
+				A75D860C1D124D10004AC48E /* PQueue.hpp */,
+				A75D860E1D124D2E004AC48E /* Node.cpp */,
+				A75D860F1D124D2E004AC48E /* Node.h */,
+				A75D86081D124CEB004AC48E /* Event.cpp */,
+				A75D86091D124CEB004AC48E /* Event.hpp */,
+				A75D86111D124E94004AC48E /* EmptyDataCollectionException.cpp */,
+				A75D86121D124E94004AC48E /* EmptyDataCollectionException.hpp */,
 			);
 			path = CMPT225;
 			sourceTree = "<group>";
@@ -130,9 +160,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75D860A1D124CEB004AC48E /* Event.cpp in Sources */,
 				A7443BD71CFF2B1A007B4D2F /* MyADT.cpp in Sources */,
+				A75D86041D124C9E004AC48E /* BankSimApp.cpp in Sources */,
 				A7443BD11CFF2AC2007B4D2F /* Profile.cpp in Sources */,
+				A75D86131D124E94004AC48E /* EmptyDataCollectionException.cpp in Sources */,
+				A75D860D1D124D10004AC48E /* PQueue.cpp in Sources */,
+				A75D86071D124CDB004AC48E /* Queue.cpp in Sources */,
 				A7443BD41CFF2B05007B4D2F /* FriendsBook.cpp in Sources */,
+				A75D86101D124D2E004AC48E /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
