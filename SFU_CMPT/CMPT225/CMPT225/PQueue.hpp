@@ -1,10 +1,20 @@
-//
-//  PQueue.hpp
-//  CMPT225
-//
-//  Created by June Kim on 2016-06-15.
-//  Copyright © 2016 June Kim. All rights reserved.
-//
+
+/*
+ * filename: MyADT.cpp
+ *
+ * Class Description: A data collection ADT class to satisfy Assn 1's requiremetns.
+ * Class Invariant: Data collection with the following characteristics:
+ *                   - Each element is unique (no duplicate).
+ *                   - Once it has been ascertained that the element has not already been
+ *                     inserted, its data structure allows insertion in O(1)
+ *                   - Once the element to be removed as been found,
+ *                     its data structure allows removal in O(1).
+ *                   - Its data structure is resizable: when full, it expands to accommodate
+ *                     new element insertions. This is done unbeknown to the client code.
+ *
+ * Creation date: June 1, 2016
+ * Author: June Kim
+ */
 
 #ifndef PQueue_hpp
 #define PQueue_hpp
@@ -17,7 +27,7 @@
 
 // Description: Returns "true" is this Priority Queue is empty, otherwise "false".
 // Time Efficiency: O(1)
-bool isEmpty() ;
+const bool isEmpty() ;
 
 // Description: Inserts newElement in sort order.
 //              It returns "true" if successful, otherwise "false".
@@ -34,6 +44,6 @@ bool dequeue();
 // Precondition: This Priority Queue is not empty.
 // Postcondition: This Priority Queue is unchanged.
 // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
-Event peek()  throw(EmptyDataCollectionException);
+const Event peek()  throw(EmptyDataCollectionException);
 
 #endif /* PQueue_hpp */

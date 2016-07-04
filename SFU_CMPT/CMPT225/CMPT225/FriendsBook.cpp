@@ -118,7 +118,7 @@ void modify(MyADT* theMembers) {
 }
 
 
-int main() {
+int mainFriendsBook() { //main() previously
     
     // Variables declaration
     MyADT* members = new MyADT();

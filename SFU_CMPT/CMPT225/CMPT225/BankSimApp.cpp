@@ -1,9 +1,23 @@
-//
-//  BankSimApp.cpp
-//  CMPT225
-//
-//  Created by June Kim on 2016-06-15.
-//  Copyright © 2016 June Kim. All rights reserved.
-//
 
-#include "BankSimApp.hpp"
+/*
+ * filename: BankSimApp.cpp
+ *
+ * Class Description: A simulation that takes inputs from stdin
+ *
+ * Creation date: June 1, 2016
+ * Author: June Kim
+ */
+
+#include <stdio.h>
+#include "Event.hpp"
+#include "EmptyDataCollectionException.hpp"
+
+void drive() {
+    
+}
+
+
+int main(int argc, char* argv[]) {
+    drive();
+    return 0;
+}
