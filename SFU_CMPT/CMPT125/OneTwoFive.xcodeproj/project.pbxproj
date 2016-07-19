@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A7013E9C1CEB9D6E0043A9CF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A7013E9B1CEB9D6E0043A9CF /* main.c */; };
 		A7DDD7B01D29EA8500AE4B16 /* Queue.c in Sources */ = {isa = PBXBuildFile; fileRef = A7DDD7AE1D29EA8500AE4B16 /* Queue.c */; };
+		A7DDD7B41D2A008B00AE4B16 /* LL.c in Sources */ = {isa = PBXBuildFile; fileRef = A7DDD7B31D2A008B00AE4B16 /* LL.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,9 @@
 		A75067381D04BC5A0085D5D1 /* reachabilityMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reachabilityMap.c; sourceTree = "<group>"; };
 		A7DDD7AE1D29EA8500AE4B16 /* Queue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Queue.c; sourceTree = "<group>"; };
 		A7DDD7AF1D29EA8500AE4B16 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		A7DDD7B11D29FF6D00AE4B16 /* LL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LL.h; sourceTree = "<group>"; };
+		A7DDD7B21D29FF9400AE4B16 /* LL-node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LL-node.h"; sourceTree = "<group>"; };
+		A7DDD7B31D2A008B00AE4B16 /* LL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LL.c; sourceTree = "<group>"; };
 		A7EF3E941D03866400558508 /* asn2problem1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asn2problem1.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +69,9 @@
 			isa = PBXGroup;
 			children = (
 				A7013E9B1CEB9D6E0043A9CF /* main.c */,
+				A7DDD7B21D29FF9400AE4B16 /* LL-node.h */,
+				A7DDD7B11D29FF6D00AE4B16 /* LL.h */,
+				A7DDD7B31D2A008B00AE4B16 /* LL.c */,
 				A7DDD7AE1D29EA8500AE4B16 /* Queue.c */,
 				A7DDD7AF1D29EA8500AE4B16 /* Queue.h */,
 				A7EF3E941D03866400558508 /* asn2problem1.c */,
@@ -132,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7013E9C1CEB9D6E0043A9CF /* main.c in Sources */,
+				A7DDD7B41D2A008B00AE4B16 /* LL.c in Sources */,
 				A7DDD7B01D29EA8500AE4B16 /* Queue.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
